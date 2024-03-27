@@ -1,6 +1,5 @@
 using EFCoreWebApp;
 using EFCoreWebApp.DAL;
-using EFCoreWebApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("connection")));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddRazorPages();
-builder.Services.AddDbContext<EFCoreWebAppContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("EFCoreWebAppContext") ?? throw new InvalidOperationException("Connection string 'EFCoreWebAppContext' not found.")));
 builder.Services.AddControllersWithViews();
 builder.Services.Configure<IdentityOptions>(options =>
 {
